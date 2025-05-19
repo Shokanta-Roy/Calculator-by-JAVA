@@ -101,7 +101,7 @@ public class Calculator {
                                 double numB = Double.parseDouble(B);
 
                                 if (operator == "+") {
-                                    A = (numA+numB).toString();
+                                    //A = (numA+numB).toString();
                                     displayLabel.setText(removeZeroDecimal(numA+numB));
                                 }
                                 else if (operator == "-") {
@@ -113,7 +113,7 @@ public class Calculator {
                                 else if (operator == "÷") {
                                     displayLabel.setText(removeZeroDecimal(numA/numB));
                                 }
-                                //clearAll();
+                                clearAll();
                             }
                         }
                         else if ("+-×÷".contains(buttonValue)) {
@@ -127,6 +127,7 @@ public class Calculator {
                     else if(Arrays.asList(topSymbols).contains(buttonValue)){
                         if (buttonValue == "AC") {
                             clearAll();
+                            displayLabel.setText("0");
                         }
                         else if (buttonValue== "+/-") {
                             double numDisplay = Double.parseDouble(displayLabel.getText());
@@ -154,6 +155,16 @@ public class Calculator {
                                 displayLabel.setText(displayLabel.getText() + buttonValue);
                             }
                         }
+                        // Add this block for square root
+                        else if (buttonValue.equals("√")) {
+                            double numDisplay = Double.parseDouble(displayLabel.getText());
+                            if (numDisplay >= 0) {
+                                numDisplay = Math.sqrt(numDisplay);
+                                displayLabel.setText(removeZeroDecimal(numDisplay));
+                            } else {
+                                displayLabel.setText("Error");
+                            }
+                        }
                     }
                 }
             });
@@ -165,7 +176,7 @@ public class Calculator {
         A = "0";
         B = null;
         operator = null;
-        displayLabel.setText("0");
+        
     }
 
     String removeZeroDecimal(double numDisplay) {
